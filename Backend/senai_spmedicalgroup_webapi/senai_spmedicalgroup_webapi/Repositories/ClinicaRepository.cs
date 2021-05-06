@@ -17,22 +17,41 @@ namespace senai_spmedicalgroup_webapi.Repositories
         spmedicalgroupContext ctx = new spmedicalgroupContext();
         public void Atualizar(int id, Clinica novaClinicaAtual)
         {
-            throw new NotImplementedException();
+            //Busca uma clinica 
+            Clinica clinicabuscada = BuscarPorId(id);
+
+            if (novaClinicaAtual.Nome!= null)
+            {
+                //Atribui novos valores aos campos existentes
+                clinicabuscada.Nome = novaClinicaAtual.Nome;
+            }
+            //Atualiza uma clinica que foi buscada 
+            ctx.Clinicas.Update(clinicabuscada);
+            //Salva as informações para serem salvas no Banco de dados
+            ctx.SaveChanges();
         }
 
         public Clinica BuscarPorId(int id)
         {
-            throw new NotImplementedException();
+            //Retorna a primeira clinica para o id informado
+            return ctx.Clinicas.FirstOrDefault(cli => cli.IdClinica == id);
         }
 
         public void Cadastrar(Clinica novaClinica)
         {
-            throw new NotImplementedException();
+            ctx.Clinicas.Add(novaClinica);
+
+            ctx.SaveChanges();
         }
 
         public void Deletar(int id)
         {
-            throw new NotImplementedException();
+            //Busca uma clinica
+            Clinica clinicabuscada = BuscarPorId(id);
+            //Remove a clinica buscada
+            ctx.Clinicas.Remove(clinicabuscada);
+            //Salva as alterações
+            ctx.SaveChanges();
         }
 
         /// <summary>
