@@ -1,4 +1,5 @@
-﻿using senai_spmedicalgroup_webapi.Domains;
+﻿using senai_spmedicalgroup_webapi.Contexts;
+using senai_spmedicalgroup_webapi.Domains;
 using senai_spmedicalgroup_webapi.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,19 @@ namespace senai_spmedicalgroup_webapi.Repositories
 {
     public class MedicoRepository : IMedicoRepository
     {
+        spmedicalgroupContext ctx = new spmedicalgroupContext();
         public void Atualizar(int id, Medico novoMedicoAtual)
         {
-            throw new NotImplementedException();
+            Medico medicoBuscado = BuscarPorId(id);
+
+            if (novoMedicoAtual.Crm != null)
+            {
+               medicoBuscado.Crm = novoMedicoAtual.Crm;
+            }
+
+            ctx.Medicos.Update(medicoBuscado);
+
+            ctx.SaveChanges();
         }
 
         public Medico BuscarPorId(int id)
@@ -31,7 +42,7 @@ namespace senai_spmedicalgroup_webapi.Repositories
 
         public List<Medico> ListarTodos()
         {
-            throw new NotImplementedException();
+            return ctx.Medicos.ToList();
         }
     }
 }

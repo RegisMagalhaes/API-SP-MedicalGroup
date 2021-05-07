@@ -128,10 +128,10 @@ namespace senai_spmedicalgroup_webapi.Controllers
 
                 return StatusCode(204);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return BadRequest(ex);
             }
         }
     }

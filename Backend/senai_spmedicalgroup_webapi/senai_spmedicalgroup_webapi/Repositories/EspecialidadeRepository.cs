@@ -1,4 +1,5 @@
-﻿using senai_spmedicalgroup_webapi.Domains;
+﻿using senai_spmedicalgroup_webapi.Contexts;
+using senai_spmedicalgroup_webapi.Domains;
 using senai_spmedicalgroup_webapi.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,29 +10,45 @@ namespace senai_spmedicalgroup_webapi.Repositories
 {
     public class EspecialidadeRepository : IEspecialidadeRepository
     {
+        spmedicalgroupContext ctx = new spmedicalgroupContext();
         public void Atualizar(int id, Especialidade novaEspecialidadeAtual)
         {
-            throw new NotImplementedException();
+            Especialidade especialidadeBuscada = BuscarPorId(id);
+
+            if (novaEspecialidadeAtual.NomeEspecialidade != null)
+            {
+                especialidadeBuscada.NomeEspecialidade = novaEspecialidadeAtual.NomeEspecialidade;
+            }
+
+            ctx.Especialidades.Update(especialidadeBuscada);
+
+            ctx.SaveChanges();
         }
 
         public Especialidade BuscarPorId(int id)
         {
-            throw new NotImplementedException();
+            return ctx.Especialidades.FirstOrDefault(esp => esp.IdEspecialidade==id);
         }
 
         public void Cadastrar(Especialidade novaEspecialidade)
         {
-            throw new NotImplementedException();
+            ctx.Especialidades.Add(novaEspecialidade);
+
+            ctx.SaveChanges();
         }
 
         public void Deletar(int id)
         {
-            throw new NotImplementedException();
+            Especialidade especialidadeBuscada = BuscarPorId(id);
+
+            ctx.Especialidades.Remove(especialidadeBuscada);
+
+            ctx.SaveChanges();
         }
 
         public List<Especialidade> ListaTodas()
         {
-            throw new NotImplementedException();
+            return ctx.Especialidades.ToList();
         }
     }
 }
