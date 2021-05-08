@@ -13,7 +13,7 @@ namespace senai_spmedicalgroup_webapi.Repositories
         spmedicalgroupContext ctx = new spmedicalgroupContext();
         public List<TipoUsuario> ListarTodosTipos()
         {
-            throw new NotImplementedException();
+            return ctx.TipoUsuarios.ToList();
         }
     }
 }

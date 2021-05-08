@@ -11,14 +11,25 @@ namespace senai_spmedicalgroup_webapi.Repositories
     public class UsuarioRepository : IUsuarioRepository
     {
         spmedicalgroupContext ctx = new spmedicalgroupContext();
-        public void Atualizar(Usuario novoUsuarioAtual)
+
+ 
+
+        public void Atualizar(int id, Usuario novoUsuarioAtual)
         {
-            throw new NotImplementedException();
+            Usuario usuarioBuscado = BuscarPorId(id);
+
+            if (novoUsuarioAtual.Email != null)
+            {
+                usuarioBuscado.Email = novoUsuarioAtual.Email;
+            }
+            ctx.Usuarios.Update(usuarioBuscado);
+
+            ctx.SaveChanges();
         }
 
         public Usuario BuscarPorId(int id)
         {
-            throw new NotImplementedException();
+            return ctx.Usuarios.FirstOrDefault(us => us.IdUsuario == id);
         }
 
         public void Cadastrar(Usuario novoUsuario)
@@ -33,7 +44,7 @@ namespace senai_spmedicalgroup_webapi.Repositories
 
         public List<Usuario> ListarTodos()
         {
-            throw new NotImplementedException();
+            return ctx.Usuarios.ToList();
         }
     }
 }

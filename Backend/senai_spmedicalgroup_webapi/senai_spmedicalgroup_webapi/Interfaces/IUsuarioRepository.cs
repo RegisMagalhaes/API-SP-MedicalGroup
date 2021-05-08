@@ -34,7 +34,7 @@ namespace senai_spmedicalgroup_webapi.Interfaces
         /// Atualiza um usuario do sistema
         /// </summary>
         /// <param name="novoUsuarioAtual">objeto usuario</param>
-        void Atualizar(Usuario novoUsuarioAtual);
+        void Atualizar(int id,Usuario novoUsuarioAtual);
 
         /// <summary>
         /// Deleta um usuario do sistema

@@ -27,17 +27,23 @@ namespace senai_spmedicalgroup_webapi.Repositories
 
         public Medico BuscarPorId(int id)
         {
-            throw new NotImplementedException();
+            return ctx.Medicos.FirstOrDefault(esp => esp.IdMedico == id);
         }
 
         public void Cadastrar(Medico novoMedico)
         {
-            throw new NotImplementedException();
+            ctx.Medicos.Add(novoMedico);
+
+            ctx.SaveChanges();
         }
 
         public void Deletar(int id)
         {
-            throw new NotImplementedException();
+            Medico medicoBuscado = BuscarPorId(id);
+
+            ctx.Medicos.Remove(medicoBuscado);
+
+            ctx.SaveChanges();
         }
 
         public List<Medico> ListarTodos()
