@@ -27,13 +27,18 @@ namespace senai_spmedicalgroup_webapi.Repositories
 
         public Consultum BuscarPorId(int id)
         {
+            //Retorna a primeira consulta para o ID informado
             return ctx.Consulta.FirstOrDefault(cli => cli.Idconsulta == id);
         }
-
+        /// <summary>
+        /// Cadastra uma nova consulta 
+        /// </summary>
+        /// <param name="novaConsulta"></param>
         public void Cadastrar(Consultum novaConsulta)
         {
+            //Adiciona uma nova consulta para ser gravada no banco de dados
             ctx.Consulta.Add(novaConsulta);
-
+            //Salva as alterações
             ctx.SaveChanges();
         }
 
@@ -50,5 +55,7 @@ namespace senai_spmedicalgroup_webapi.Repositories
         {
             return ctx.Consulta.ToList();
         }
+
+        
     }
 }
